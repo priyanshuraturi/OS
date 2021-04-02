@@ -64,6 +64,7 @@ int main(){
 	    }	
             if(pid!=-1) push(pid);
             pid=pop();
+			if(pid!=-1){
             time+=(p[pid].bt<tq)?p[pid].bt:tq;
 			p[pid].bt-=(p[pid].bt<tq)?p[pid].bt:tq;
 			if(p[pid].bt==0){
@@ -76,6 +77,10 @@ int main(){
              pid=-1;
 
 		}
+			}
+			else{
+				time+=1;
+			}
         
 	}
 	printf("\nPID\tBT\tAT\tCT\tTAT\tWT\n");
