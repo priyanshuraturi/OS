@@ -38,7 +38,6 @@ int main()
     {
         int minid = findMinimum(reqs, head, req);
         seek_op += abs(head - reqs[minid].data);
-        printf(" \n %d  - %d \n ", head, reqs[minid].data);
         reqs[minid].completed = 1;
         head = reqs[minid].data;
     }
