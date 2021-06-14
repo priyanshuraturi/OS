@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 struct process
 {
     int bt;
@@ -26,23 +27,31 @@ int main()
     int time = 0, processCompleted = 0;
     while (processCompleted < num)
     {
-        int min_index = 0, min_bt = 1000;
+        int min_index = -1, min_bt = 1000;
         for (int i = 0; i < num; i++)
         {
-            if (time >= p[i].at && p[i].bt < min_bt && p[i].completed == 0)
+            if (time >= p[i].at && p[i].bt <= min_bt && p[i].completed == 0)
             {
+
                 min_index = i;
                 min_bt = p[i].bt;
             }
         }
-        time += p[min_index].bt;
-        int tat = time - p[min_index].at;
-        int wt = tat - p[min_index].at;
-        avgTat += tat;
-        avgWt += wt;
-        printf("P%d\t%d\t%d\t%d\t%d\n", min_index + 1, p[min_index].bt, p[min_index].at, tat, wt);
-        processCompleted += 1;
-        p[min_index].completed = 1;
+        if (min_index != -1)
+        {
+            time += p[min_index].bt;
+            int tat = time - p[min_index].at;
+            int wt = tat - p[min_index].bt;
+            avgTat += tat;
+            avgWt += wt;
+            printf("P%d\t%d\t%d\t%d\t%d\n", min_index + 1, p[min_index].bt, p[min_index].at, tat, wt);
+            processCompleted += 1;
+            p[min_index].completed = 1;
+        }
+        else
+        {
+            time += 1;
+        }
     }
     avgTat /= num;
     avgWt /= num;
